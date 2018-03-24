@@ -8,32 +8,43 @@ class ControlledForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      queries: [{ predicate: '', filter: '', text: ''}],
-      currentFilter: inputFilterConfig,
-      currentPredicates: inputPredConfig
+      queries: [{ 
+        predicate: '', 
+        filter: '', 
+        text: '',
+        text2: '',
+        predicateList: inputPredConfig,
+        filterList: inputFilterConfig,
+        showRangeInputs: false
+      }]
     };
   }
-  getFilteredFList = (type) => {
-    const cleanFilterList = inputFilterConfig.filter(f => f.type === type);
-    this.setState({ currentFilter: cleanFilterList});
-  }
-  getFilteredPList = (type) => {
-    const cleanPredicatesList = inputPredConfig.filter(f => f.type === type);
-    this.setState({ currentPredicates: cleanPredicatesList});
-  }
   handlePredicateChange = (idx) => (evt) => {
-    if (evt !== null) this.getFilteredFList(evt.type);
     const newQuery = this.state.queries.map((query, qidx) => {
       if (idx !== qidx) return query;
-      return { ...query, predicate: evt };
+      if (evt !== null) {
+        const cleanFilterList = inputFilterConfig.filter(f => f.type === evt.type);
+        return { ...query, predicate: evt, filterList: cleanFilterList};
+      }
+      return { ...query, predicate: evt, filterList: inputFilterConfig};
     });
     this.setState({ queries: newQuery });
   }
   handleFilterChange = (idx) => (evt) => {
-    if (evt !== null) this.getFilteredPList(evt.type);
     const newQuery = this.state.queries.map((query, qidx) => {
       if (idx !== qidx) return query;
-      return { ...query, filter: evt };
+      if (evt !== null) {
+        let rangeFieldVal = query.showRangeInputs;
+        if (evt.value === 'range') rangeFieldVal = true;
+        const cleanPredicatesList = inputPredConfig.filter(f => f.type === evt.type);
+        return { 
+          ...query,
+          filter: evt,
+          predicateList: cleanPredicatesList,
+          showRangeInputs: rangeFieldVal
+        };
+      }
+      return { ...query, filter: evt, predicateList: inputPredConfig };
     });
     this.setState({ queries: newQuery });
   }
@@ -44,10 +55,23 @@ class ControlledForm extends React.Component {
     });
     this.setState({ queries: newQuery });
   }
-
+  handleText2Change = (idx) => (evt) => {
+    const newQuery = this.state.queries.map((query, qidx) => {
+      if (idx !== qidx) return query;
+      return { ...query, text2: evt.target.value };
+    });
+    this.setState({ queries: newQuery });
+  }
   handleAddQuery = () => {
     this.setState({
-      queries: this.state.queries.concat([{ predicate: '', filter: '', text: '' }])
+      queries: this.state.queries.concat([{ 
+        predicate: '',
+        filter: '',
+        text: '',
+        predicateList: inputPredConfig,
+        filterList: inputFilterConfig,
+        showRangeInputs: false
+      }])
     });
   }
   handleRemoveQuery = (idx) => () => {
@@ -56,43 +80,69 @@ class ControlledForm extends React.Component {
     });
   }
   handleSubmit = (evt) => {
-    const { name, shareholders } = this.state;
-    alert(`Incorporated: ${name} with ${shareholders.length} shareholders`);
+    const { queries } = this.state;
+    console.log('queries', queries);
   }
 
   render() {
+    console.log(this.state.queries, 'this.state.quieries');
     return (
       <form onSubmit={this.handleSubmit}>
         {this.state.queries.map((query, idx) => (
           <div key={idx} className="row-wrapper">
-            {idx !== 0 ? (
-              <button type="button" onClick={this.handleRemoveQuery(idx)} className="rm-btn">-</button>
-              ) : <div style={{ marginLeft: 45}}></div>}
+            <button type="button" 
+              className="rm-btn"
+              disabled={idx !==0 ? false : true }
+              onClick={this.handleRemoveQuery(idx)} 
+            >-</button>
             <div className="col select-wrapper">
               <Select
                 placeholder="Select Predicate"
                 name="predicate-field"
                 value={query.predicate}
                 onChange={this.handlePredicateChange(idx)}
-                options={this.state.currentPredicates}
+                options={query.predicateList}
               />
             </div>
+            {query.showRangeInputs && <button type="button" disabled className="txt-btn">is</button>}
             <div className="col select-wrapper">
               <Select
                 placeholder="Select Filter"
                 name="filter-field"
                 value={query.filter}
                 onChange={this.handleFilterChange(idx)}
-                options={this.state.currentFilter}
+                options={query.filterList}
               />
-
             </div>
-            <input
-              type="text"
-              placeholder={`Query Text #${idx + 1}`}
-              value={query.text}
-              onChange={this.handleTextChange(idx)}
-            />
+            {query.showRangeInputs ? (
+              <div>
+                <input
+                  className="col range-wrapper"
+                  type="text"
+                  placeholder="min"
+                  value={query.text}
+                  onChange={this.handleTextChange(idx)}
+                />
+                <button type="button" disabled className="col pretend-btn">and</button>
+                <input
+                  type="text"
+                  className="col range-wrapper "
+                  placeholder="max"
+                  value={query.text2}
+                  onChange={this.handleText2Change(idx)}
+                />
+              </div>
+            ) : (
+              <div className="col">
+                <input
+                  type="text"
+                  className="input-wrapper"
+                  placeholder={`Query Text #${idx + 1}`}
+                  value={query.text}
+                  onChange={this.handleTextChange(idx)}
+                />
+              </div>
+            )}
           </div>
         ))}
         <button type="button" onClick={this.handleAddQuery} className="small">Add</button>

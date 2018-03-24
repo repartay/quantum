@@ -14,3 +14,25 @@
 .rm-btn {
 	width: 45px;
 }
+.txt-btn {
+	background-color: #E8E8E8;
+	margin: 0 .4em;
+	width: 45px;
+	border: none;
+}
+.pretend-btn {
+	background-color: #E8E8E8;
+	margin: 0 .4em;
+	width: 45px;
+	height: 100%;
+	border: none;
+}
+
+.input-wrapper {
+	height: 90%;
+	min-width: 200px;
+}
+.range-wrapper {
+	height: 90%;
+	max-width: 150px;
+}
