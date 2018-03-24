@@ -65,7 +65,9 @@ class ControlledForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         {this.state.queries.map((query, idx) => (
           <div key={idx} className="row-wrapper">
-            {idx !== 0 && <button type="button" onClick={this.handleRemoveQuery(idx)} className="small">-</button>}
+            {idx !== 0 ? (
+              <button type="button" onClick={this.handleRemoveQuery(idx)} className="rm-btn">-</button>
+              ) : <div style={{ marginLeft: 45}}></div>}
             <div className="col select-wrapper">
               <Select
                 placeholder="Select Predicate"

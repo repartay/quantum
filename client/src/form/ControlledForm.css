@@ -1,5 +1,6 @@
 .row-wrapper {
 	margin-left: 1em;
+	padding-bottom: .8em;
 	display: flex;
 }
 
@@ -8,5 +9,8 @@
 }
 
 .col {
-	padding: 0 .5em;
+	padding: 0 .3em;
+}
+.rm-btn {
+	width: 45px;
 }
