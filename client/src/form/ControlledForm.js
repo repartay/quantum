@@ -1,5 +1,7 @@
+import _ from 'lodash';
 import React from 'react';
 import Select from 'react-select';
+import axios from 'axios';
 import 'react-select/dist/react-select.css';
 import { inputPredConfig, inputFilterConfig } from '../schemas';
 import './ControlledForm.css';
@@ -81,9 +83,24 @@ class ControlledForm extends React.Component {
   }
   handleSubmit = (evt) => {
     const { queries } = this.state;
-    console.log('queries', queries);
+    const cleanQueries = queries.map(query => _.omit(query, ['filterList', 'predicateList', 'showRangeInputs'] ))
+    console.log('cleanQueries', cleanQueries);
+    const jsoned = JSON.stringify(cleanQueries);
+    console.log('jsoned', jsoned);
+    // const res = axios.get('/api/session', cleanQueries); JSON.stringify(cleanQueries)
+    axios.post('/api/session', {
+      headers : {
+        'Content-Type' : 'application/json'
+      },
+      data: jsoned
+    })
+    .then(function (response) {
+      console.log('res===', response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
-
   render() {
     console.log(this.state.queries, 'this.state.quieries');
     return (
@@ -145,8 +162,12 @@ class ControlledForm extends React.Component {
             )}
           </div>
         ))}
-        <button type="button" onClick={this.handleAddQuery} className="small">Add</button>
-        <button>Submit</button>
+        <div className="row-wrapper">
+          <button type="button" onClick={this.handleAddQuery} className="add-btn">And</button>
+        </div>
+        <div className="bottom-row">
+          <button type="button" className="submit-btn" onClick={this.handleSubmit}>Search</button>
+        </div>
       </form>
     )
   }

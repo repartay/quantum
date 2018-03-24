@@ -3,7 +3,7 @@
 	padding-bottom: .8em;
 	display: flex;
 }
-
+button:focus {outline:0;}
 .select-wrapper {
 	min-width: 250px;
 }
@@ -12,13 +12,16 @@
 	padding: 0 .3em;
 }
 .rm-btn {
+	border-radius: 3px;
 	width: 45px;
+	border: none;
 }
 .txt-btn {
 	background-color: #E8E8E8;
 	margin: 0 .4em;
 	width: 45px;
 	border: none;
+	border-radius: 3px;
 }
 .pretend-btn {
 	background-color: #E8E8E8;
@@ -26,6 +29,7 @@
 	width: 45px;
 	height: 100%;
 	border: none;
+	border-radius: 3px;
 }
 
 .input-wrapper {
@@ -35,4 +39,33 @@
 .range-wrapper {
 	height: 90%;
 	max-width: 150px;
+}
+
+.add-btn {
+	background-color: #1E90FF;
+	color: white;
+	text-transform: uppercase;
+	height: 35px;
+	border-radius: 3px;
+	width: 90px;
+}
+.add-btn:hover {
+	background-color: #4169E1;
+	color: white;
+}
+.bottom-row {
+	margin-top: 5em;
+	display: flex;
+	flex-direction: row-reverse;
+}
+.submit-btn {
+	background-color: #1E90FF;
+	color: white;
+	height: 30px;
+	width: 150px;
+	border-radius: 3px;
+}
+.submit-btn:hover {
+	background-color: #4169E1;
+	color: white;
 }
