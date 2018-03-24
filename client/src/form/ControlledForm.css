@@ -1,0 +1,12 @@
+.row-wrapper {
+	margin-left: 1em;
+	display: flex;
+}
+
+.select-wrapper {
+	min-width: 250px;
+}
+
+.col {
+	padding: 0 .5em;
+}

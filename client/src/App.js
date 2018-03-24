@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import ControlledForm from './form/ControlledForm';
+import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <nav>
-			<div style={{ textAlign: 'left', marginLeft: 20, color: '#616161' }}>
-				SEARCH FOR SESSIONS
-			</div>
-		</nav>
-     	<ControlledForm />
+      <div className="container">
+        <header className="app-header">
+			Search For Sessions
+		</header>
+		<div className="form-wrapper">
+     		<ControlledForm />
+     	</div>
       </div>
     );
   }

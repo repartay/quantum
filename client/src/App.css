@@ -1,0 +1,13 @@
+.container {
+	margin: 0 10px;
+}
+.app-header {
+	border-bottom: 1px solid #d6d6c2;
+	color: #616161;
+	padding: .8em .5em;
+	text-align: left;
+	text-transform: uppercase;
+}
+.form-wrapper {
+	margin: 10px;
+}
