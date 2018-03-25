@@ -1,71 +1,72 @@
+/* Form Layout */
 .row-wrapper {
-	margin-left: 1em;
-	padding-bottom: .8em;
-	display: flex;
+  display: flex;
+  margin-left: 1em;
+  padding-bottom: .8em;
 }
-button:focus {outline:0;}
 .select-wrapper {
-	min-width: 250px;
+  min-width: 250px;
 }
-
 .col {
-	padding: 0 .3em;
+  padding: 0 .3em;
 }
-.rm-btn {
-	border-radius: 3px;
-	width: 45px;
-	border: none;
-}
-.txt-btn {
-	background-color: #E8E8E8;
-	margin: 0 .4em;
-	width: 45px;
-	border: none;
-	border-radius: 3px;
-}
-.pretend-btn {
-	background-color: #E8E8E8;
-	margin: 0 .4em;
-	width: 45px;
-	height: 100%;
-	border: none;
-	border-radius: 3px;
-}
-
 .input-wrapper {
-	height: 90%;
-	min-width: 200px;
+  height: 90%;
+  min-width: 200px;
 }
 .range-wrapper {
-	height: 90%;
-	max-width: 150px;
-}
-
-.add-btn {
-	background-color: #1E90FF;
-	color: white;
-	text-transform: uppercase;
-	height: 35px;
-	border-radius: 3px;
-	width: 90px;
-}
-.add-btn:hover {
-	background-color: #4169E1;
-	color: white;
+  height: 90%;
+  max-width: 150px;
 }
 .bottom-row {
-	margin-top: 5em;
-	display: flex;
-	flex-direction: row-reverse;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-top: 5em;
+}
+
+/* Buttons */
+button:focus {outline:0;}
+.rm-btn {
+  border: none;
+  border-radius: 3px;
+  width: 45px;
+}
+.txt-btn {
+  background-color: #E8E8E8;
+  border: none;
+  border-radius: 3px;
+  margin: 0 .4em;
+  width: 45px;
+}
+.un-btn {
+  background-color: #E8E8E8;
+  border: none;
+  border-radius: 3px;
+  height: 100%;
+  margin: 0 .4em;
+  width: 45px;
+}
+.add-btn {
+  background-color: #1E90FF;
+  border-radius: 3px;
+  color: white;
+  height: 35px;
+  text-transform: uppercase;
+  width: 90px;
+}
+.add-btn:hover {
+  background-color: #4169E1;
+  color: white;
 }
 .submit-btn {
-	background-color: #1E90FF;
-	color: white;
-	height: 30px;
-	width: 150px;
-	border-radius: 3px;
+  background-color: #1E90FF;
+  border-radius: 3px;
+  color: white;
+  height: 30px;
+  width: 150px;
 }
 .submit-btn:hover {
-	background-color: #4169E1;
-	color: white;
+  background-color: #4169E1;
+  color: white;
 }
+

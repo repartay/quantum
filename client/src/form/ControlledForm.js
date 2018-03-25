@@ -10,9 +10,9 @@ class ControlledForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      queries: [{ 
-        predicate: '', 
-        filter: '', 
+      queries: [{
+        predicate: '',
+        filter: '',
         text: '',
         text2: '',
         predicateList: inputPredConfig,
@@ -39,7 +39,7 @@ class ControlledForm extends React.Component {
         let rangeFieldVal = query.showRangeInputs;
         if (evt.value === 'range') rangeFieldVal = true;
         const cleanPredicatesList = inputPredConfig.filter(f => f.type === evt.type);
-        return { 
+        return {
           ...query,
           filter: evt,
           predicateList: cleanPredicatesList,
@@ -66,7 +66,7 @@ class ControlledForm extends React.Component {
   }
   handleAddQuery = () => {
     this.setState({
-      queries: this.state.queries.concat([{ 
+      queries: this.state.queries.concat([{
         predicate: '',
         filter: '',
         text: '',
@@ -113,10 +113,10 @@ class ControlledForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         {this.state.queries.map((query, idx) => (
           <div key={idx} className="row-wrapper">
-            <button type="button" 
+            <button type="button"
               className="rm-btn"
               disabled={idx !==0 ? false : true }
-              onClick={this.handleRemoveQuery(idx)} 
+              onClick={this.handleRemoveQuery(idx)}
             >-</button>
             <div className="col select-wrapper">
               <Select
@@ -146,7 +146,7 @@ class ControlledForm extends React.Component {
                   value={query.text}
                   onChange={this.handleTextChange(idx)}
                 />
-                <button type="button" disabled className="col pretend-btn">and</button>
+                <button type="button" disabled className="col un-btn">and</button>
                 <input
                   type="text"
                   className="col range-wrapper "
@@ -160,7 +160,6 @@ class ControlledForm extends React.Component {
                 <input
                   type="text"
                   className="input-wrapper"
-                  placeholder={`Query Text #${idx + 1}`}
                   value={query.text}
                   onChange={this.handleTextChange(idx)}
                 />
