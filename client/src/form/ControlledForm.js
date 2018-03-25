@@ -84,25 +84,31 @@ class ControlledForm extends React.Component {
   handleSubmit = (evt) => {
     const { queries } = this.state;
     const cleanQueries = queries.map(query => _.omit(query, ['filterList', 'predicateList', 'showRangeInputs'] ))
-    console.log('cleanQueries', cleanQueries);
-    const jsoned = JSON.stringify(cleanQueries);
-    console.log('jsoned', jsoned);
-    // const res = axios.get('/api/session', cleanQueries); JSON.stringify(cleanQueries)
+    let sqlArray = [];
+    cleanQueries.map((cQ) => {
+      if (cQ.filter.value === 'range') {
+        sqlArray.push(`${cQ.predicate.value} ${cQ.filter.prefix} '${cQ.text}' ${cQ.filter.suffix} '${cQ.text2}'`);
+      } else if (cQ.filter.RegEx) {
+        sqlArray.push(`${cQ.predicate.value} ${cQ.filter.prefix} '${cQ.filter.REprefix}${cQ.text}${cQ.filter.REsuffix}'`);
+      } else {
+        sqlArray.push(`${cQ.predicate.value} ${cQ.filter.prefix} '${cQ.text}'`);
+      }
+      return sqlArray;
+    });
     axios.post('/api/session', {
       headers : {
         'Content-Type' : 'application/json'
       },
-      data: jsoned
+      data: sqlArray
     })
     .then(function (response) {
-      console.log('res===', response);
+      console.log('SQLResponse', response.data.response);
     })
     .catch(function (error) {
       console.log(error);
     });
   }
   render() {
-    console.log(this.state.queries, 'this.state.quieries');
     return (
       <form onSubmit={this.handleSubmit}>
         {this.state.queries.map((query, idx) => (
