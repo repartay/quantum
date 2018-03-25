@@ -9,8 +9,6 @@ Because of how I set this project up, you'll have to install node_modules in two
 1. `npm i` from root directory
 2. `cd client`
 3. `npm i`
-
-Now that that's done:
 4. `cd ..` (back to root dir)
 5. Start the project with `npm run dev`
 
